@@ -60,10 +60,9 @@
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 									<%= link_to 'My Profile', edit_user_registration_path, class: 'dropdown-item' %>
 									<%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item',data: { turbo_method: 'delete' }  %>
-									<%#= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
 
 								</div>
-								<%# </turbo-frame> %>
+								
 							</li>
 							<% else %>
 							<li class="nav-item" >
@@ -78,6 +77,7 @@
 			<div class="container" style="margin-top: 55px;">
 				<%= yield %>
 			</div>
+				 <%= render "layouts/footer" %>
 
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

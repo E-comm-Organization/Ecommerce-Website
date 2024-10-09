@@ -1,37 +1,76 @@
 <div class="container mt-4">
-  <h1>All Products </h1>
-  <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-primary mb-3' %>
-  <%= link_to 'Orders', orders_path, class: 'btn btn-primary mb-3' %>
-  
+  <br>
+  <h2 class="text-center">Products</h2>
+  <br>
+  <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-primary mb-3' if current_user.admin? %>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Product ID</th>
-        <th>Name</th>
-        <th>SKU</th>
-        <th>MRP</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @products.each_with_index do |product, index| %>
-        <tr>
-          <td><%= (index + 1) %></td>
-          <td><%= product.name %></td>
-          <td><%= product.sku %></td>
-          <td>$<%= product.mrp %></td>
-          <td class="text-center">
-            <div class="d-inline-block">
-            <%= link_to 'Show', [@category, product], class: 'btn btn-primary btn-sm ' %>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
+        <%= link_to [@category, product], class: 'card-link', style: "width: 100%; text-decoration: none;" do %>
+          <div class="card shadow-sm" style="min-height: 350px;">
+            <% if product.images.attached? %>
+              <%= image_tag product.images.first, class: "card-img-top", alt: product.name, style: "height: 200px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag 'placeholder.jpg', class: "card-img-top", alt: 'Placeholder image', style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body d-flex flex-column text-center">
+                <h5 class="card-title product-name"><%= product.name %></h5>
+                <p class="card-text product-price">$<%= product.mrp %></p>
+                <div class="mt-auto">
+                  <%= button_to 'Show', [@category, product], class: 'btn btn-sm btn-info' %>
+                  <% if current_user.admin? %>
+                    <%= button_to 'Delete', [@category, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+                  <% end %>
+                </div>
             </div>
-            <div class="d-inline-block">
-            <%= button_to 'Delete', [@category, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger mb-0' %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
+<style>
 
+
+
+  .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 350px;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .card img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+    .product-name {
+    font-size: 1.25rem; /* Increase the font size */
+    font-weight: bold;  /* Make the name bold */
+    color: #333;        /* Darker color for better contrast */
+    margin-bottom: 0.5rem;
+    text-transform: capitalize; /* Capitalize product names */
+  }
+
+  .product-price {
+    font-size: 1.1rem;   /* Slightly larger than normal text */
+    color: #28a745;      /* Green color to emphasize the price */
+    font-weight: 600;    /* Medium font weight for emphasis */
+    margin-bottom: 1rem; /* Add space between price and buttons */
+  }
+
+  .card-title, .card-text {
+    margin: 0;
+  }
+
+  .btn-danger {
+    font-size: 0.875rem; /* Slightly smaller font for delete button */
+  }
+
+</style>

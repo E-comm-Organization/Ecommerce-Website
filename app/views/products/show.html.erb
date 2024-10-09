@@ -1,12 +1,9 @@
-<head>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-
 <body>
-  <div class="mt-4">
-    <h1 class="mb-4"><%= @product.name %></h1>
+  <div class="container mt-4">
+    <br>
+    <h1 class="mb-4 text-center"><%= @product.name %></h1>
+    <br>
+    <br>
     <div class="row">
       <!-- Product Image Carousel -->
       <div class="col-md-6">
@@ -37,75 +34,24 @@
         <h2 class="product-title"><%= @product.name %></h2>
         <p><strong>SKU:</strong> <%= @product.sku %></p>
         <p><strong>Size:</strong> <%= @product.size %></p>
-        <p><strong>Price:</strong> $<%= @product.price %></p>
         <p><strong>MRP:</strong> <del>$<%= @product.mrp %></del></p>
         <p><strong>Selling Price:</strong> <span class="text-success">$<%= @product.selling_price %></span></p>
 
         <!-- Action Buttons -->
         <div class="mt-4">
-          <%= link_to 'Add to Cart', '#', class: 'btn btn-success btn-lg btn-block' %>
+          <%= button_to 'Add to Cart', cart_items_path(product_id: @product.id), method: :post, class: 'btn btn-success btn-lg btn-block mt-2' %>
+
           <%= link_to 'Buy Now', new_order_path(current_user), class: 'btn btn-primary btn-lg btn-block mt-2' %>
         </div>
 
         <!-- Edit and Back to Products -->
-        <div class="mt-4">
-          <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm' %>
+        <div class="mt-4 d-flex justify-content-center">
+          <%if current_user.admin? %>
+          <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm mr-2' %>
+          <%end%>
           <%= link_to 'Back to Products', category_products_path(@category), class: 'btn btn-secondary btn-sm' %>
         </div>
       </div>
     </div>
   </div>
 </body>
-
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-  }
-
-  <%# .container {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  } %>
-
-  .carousel-item img {
-    max-width: 100%;
-    border-radius: 10px;
-  }
-
-  h2.product-title {
-    font-size: 2rem;
-    color: #343a40;
-    margin-bottom: 20px;
-  }
-
-  p {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #555;
-  }
-
-  .text-success {
-    font-weight: bold;
-  }
-
-  /* Button Styles */
-  .btn-success, .btn-primary {
-    padding: 10px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-  }
-
-  .btn-warning, .btn-secondary {
-    padding: 8px;
-    font-size: 0.9rem;
-    border-radius: 5px;
-  }
-
-  .btn-lg {
-    padding: 15px;
-  }
-</style>

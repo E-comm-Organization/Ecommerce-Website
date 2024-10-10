@@ -4,7 +4,8 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user = nil) # Allow user to be nil
+  # Allow user to be nil
+  def initialize(user = nil)
     if user.nil? # Check if user is nil (guest)
       guest_permissions
     elsif user.admin?

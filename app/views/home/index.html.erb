@@ -41,27 +41,56 @@ main {
 }
 
 .deals {
-    background-color: #f7f7f7;
     padding: 20px;
     margin: 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap; 
+    justify-content: center; /* Center cards */
 }
 
 .deal-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Keep card contents vertical */
     align-items: center;
     padding: 20px;
     border: 1px solid #ddd;
-    margin: 20px;
+    margin: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 40px); /* Adjust card width as needed */
+    transition: transform 0.3s; /* Add transition for hover effect */
+    width: calc(33.33% - 20px); /* Default size for multiple cards */
 }
+
+/* Make the card bigger if there’s only one */
+.deals > .deal-card:nth-child(1) {
+    flex: 1 1 100%; /* Full width for a single card */
+}
+
+/* Adjust card width for two cards */
+.deals > .deal-card:nth-child(n+2):nth-child(-n+3) {
+    flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+}
+
+/* Adjust card width for three or more cards */
+.deals > .deal-card:nth-child(n+4) {
+    flex: 1 1 calc(33.33% - 20px); /* 3 or more cards per row */
+}
+
+/* Card image styling */
+.deal-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Card heading styling */
+.deal-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
 
 .image-links {
     display: flex;
@@ -117,69 +146,20 @@ main {
 <body>
     <main>
         <section class="deals">
-            <h2>Up to 80% off | Electronics & accessories</h2>
+          <h2>Up to 80% off | Electronics & accessories</h2>
+          <% @categories.each do |category| %>
             <div class="deal-card">
-                <img src="<%= asset_path('offer85.jpeg') %>" style="width:470px; height:300px;" alt="Deal 1" >
-                <h3>Deal 1</h3>
-                <p>Get 20% off on all electronics</p>
-                <button>Shop Now</button>
+              <% if category.image.attached? %>
+                <a href="<%= category_products_path(category) %>">
+                  <%= image_tag(category.image, class: "img-fluid rounded", alt: category.c_name, style:"min-width: 350px;") %>
+                </a>
+              <% end %>
+              <h3><%= category.c_name %></h3>
             </div>
-            <div class="deal-card">
-                <h3>Starting ₹299 | Latest styles from top brands</h3>
-                <div class="image-links">
-                    <a href="link1.html"><img src="<%= asset_path('Kurta.jpeg') %>" alt="Image 1"></a>
-                    <a href="link2.html"><img src="<%= asset_path('kurta2.jpeg') %>" alt="Image 2"></a>
-                    <a href="link3.html"><img src="<%= asset_path('kurta3.jpeg') %>" alt="Image 3"></a>
-                    <a href="link4.html"><img src="<%= asset_path('kurta4.jpeg') %>" alt="Image 4"></a>
-                </div>
-                <button style="margin-top: 10px;">Shop Now</button>
-            </div>
+          <% end %>
         </section>
-        <section class="deals">
-            <h2>Minimum 50% off | Home, kitchen & more</h2>
-            <div class="deal-card">
-                <img src="image3.jpg" alt="Deal 3">
-                <h3>Deal 3</h3>
-                <p>Get 40% off on all home decor</p>
-                <button>Shop Now</button>
-            </div>
-            <div class="deal-card">
-                <img src="image4.jpg" alt="Deal 4">
-                <h3>Deal 4</h3>
-                <p>Get 50% off on all kitchen appliances</p>
-                <button>Shop Now</button>
-            </div>
-        </section>
-        <section class="deals">
-            <h2>Starting ₹299 | Latest styles from top brands</h2>
-            <div class="deal-card">
-                <img src="image5.jpg" alt="Deal 5">
-                <h3>Deal 5</h3>
-                <p>Get 20% off on all tops</p>
-                <button>Shop Now</button>
-            </div>
-            <div class="deal-card">
-                <img src="image6.jpg" alt="Deal 6">
-                <h3>Deal 6</h3>
-                <p>Get 30% off on all dresses</p>
-                <button>Shop Now</button>
-            </div>
-        </section>
-        <section class="deals">
-            <h2>Sign in for your best experience</h2>
-            <div class="deal-card">
-                <img src="image7.jpg" alt="Deal 7">
-                <h3>Deal 7</h3>
-                <p>Get 40% off on all sarees</p>
-                <button>Shop Now</button>
-            </div>
-            <div class="deal-card">
-                <img src="image8.jpg" alt="Deal 8">
-                <h3>Deal 8</h3>
-                <p>Get 50% off on all kurtas</p>
-                <button>Shop Now</button>
-            </div>
-        </section>
+
+
     </main>
     <script src="script.js"></script>
 </body>

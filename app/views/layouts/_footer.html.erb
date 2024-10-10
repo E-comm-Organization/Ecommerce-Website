@@ -1,0 +1,173 @@
+<style type="text/css">
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+ html, body {
+    height: 155%; /* Set the height of html and body to 100% */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox to allow vertical alignment */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.container {
+    flex: 1; /* Allow container to grow and fill the space */
+    max-width: 1170px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.footer {
+    background-color: #505ba0;
+    font-family: 'Domine', serif;
+    padding: 4rem;
+    width: 100%; /* Ensure footer is full width */
+}
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ul {
+    list-style: none;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .footer-col {
+    width: 25%;
+    padding: 0 15px;
+  }
+
+  .footer-col h4 {
+    color: #FFF;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+    font-family: 'Domine', serif;
+    margin-left: 0 ;
+
+  }
+
+  .footer-col h4::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: orange;
+    width: 50px;
+    height: 2px;
+  }
+
+  .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .footer-col ul li a {
+    color: #DDD;
+    display: block;
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .footer-col ul li a:hover {
+    color: #FFF;
+    padding-left: 7px;
+  }
+
+  .footer-col .social-links a {
+    color: #FFF;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 10px 10px 0;
+    line-height: 40px;
+    transition: all 0.5s ease;
+  }
+
+  .footer-col .social-links a:hover {
+    color: #151515;
+    background-color: #FFF;
+  }
+
+  @media(max-width: 767px) {
+    .footer-col {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media(max-width: 574px) {
+    .footer-col {
+      width: 100%;
+    }
+  }
+</style>
+
+<head>
+  <script src="https://kit.fontawesome.com/3b161c540c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <footer class="footer">
+    <div class="container row">
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="<%= services_about_path %>">About Us</a></li>
+          <li><a href="<%= services_service_path %>">Our Services</a></li>
+          <li><a href="<%= services_policy_path %>">Privacy Policy</a></li>
+          <li><a href="<%= services_career_path %>">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get Help</h4>
+        <ul>
+          <li><a href="<%= services_faq_path %>">FAQ</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Order Status</a></li>
+          <li><a href="#">Payment Options</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Online Shop</h4>
+        <ul>
+          <li><a href="#">Download</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">All Versions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <%# <% end %> 
+</body>

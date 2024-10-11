@@ -5,12 +5,18 @@
 </head>
 
 <body>
+<<<<<<< Updated upstream
   <div class="mt-4">
     <h1 class="mb-4"><%= @product.name %></h1>
+  <div class="container mt-4">
+    <br>
+    <h1 class="mb-4 text-center product-name"><%= @product.name %></h1>
+    <br>
+    <br>
     <div class="row">
       <!-- Product Image Carousel -->
       <div class="col-md-6">
-        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+        <div id="productCarousel" class="carousel slide shadow-lg" data-ride="carousel">
           <div class="carousel-inner">
             <% if @product.images.attached? %>
               <% @product.images.each_with_index do |image, index| %>
@@ -51,6 +57,28 @@
         <div class="mt-4">
           <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm' %>
           <%= link_to 'Back to Products', category_products_path(@category), class: 'btn btn-secondary btn-sm' %>
+        <div class="price-details">
+          <p class="price">₹<%= @product.selling_price %></p>
+          <p class="original-price">₹<%= @product.mrp %></p>
+        </div>
+        <h5 class="size">Size: <span><%= @product.size %></span></h5>
+        <h3 class="offers-title">Available Offers</h3>
+        <ul class="offers-list">
+          <li>Special Price: Get extra 30% off</li>
+          <li>Combo Offer: Buy 2 items, save 3%</li>
+          <li>Bank Offer: 5% Unlimited Cashback on Flipkart Axis Bank Credit Card</li>
+        </ul>
+        <!-- Action Buttons -->
+        <div class="mt-4">
+          <%= button_to '⚡Buy Now', cart_items_path(product_id: @product.id), method: :post, class: 'btn btn-primary btn-lg btn-block mt-2 shadow' %>
+           
+        </div>
+
+        <!-- Edit and Back to Products -->
+        <div class="mt-4 d-flex justify-content-center">
+          <% if current_user.admin? %>
+          <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm mr-2 shadow' %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -107,5 +135,70 @@
 
   .btn-lg {
     padding: 15px;
+
+
+  .product-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
   }
+
+  /* Price Styling */
+  .price-details {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .price {
+    font-size: 32px;
+    color: #b12704;
+    font-weight: bold;
+  }
+
+  .original-price {
+    font-size: 18px;
+    color: #757575;
+    text-decoration: line-through;
+  }
+
+
+  /* Offers Styling */
+  .offers-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #28a745;
+  }
+
+  /* Button Styling */
+  .btn {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 8px rgba(33, 136, 56, 0.2);
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 86, 179, 0.2);
+  }
+
+  /* General Spacing and Shadows */
+  .shadow-lg {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+
+  .mb-4 {
+    margin-bottom: 1.5rem;
+      }
 </style>

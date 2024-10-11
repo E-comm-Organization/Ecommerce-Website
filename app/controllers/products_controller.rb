@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def all_products
     @products = Product.all
   end
-
+   
   def index
     @category = Category.find(params[:category_id])
     @products = @category.products

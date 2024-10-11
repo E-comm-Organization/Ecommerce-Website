@@ -3,6 +3,12 @@
   <% if current_user&.role == 'admin' %>
   <%= link_to 'Add Category', new_category_path, class: 'btn btn-primary mb-3' %>
   <% end %>
+  <br>
+  <h1 class="text-center">Categories</h1>
+  <br>
+  <%if current_user.admin? %>
+  <%= link_to 'Add Category', new_category_path, class: 'btn btn-primary mb-3' %>
+  <%end%>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -21,7 +27,9 @@
           <td class="col-4">
             <div class="d-flex justify-content-between">
               <%= link_to 'View Products', category_products_path(category), class: 'btn btn-secondary' %>
+              <%if current_user.admin? %>
               <%= button_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary ml-2' %>
+              <%end%>
             </div>
           </td>
         </tr>

@@ -17,7 +17,7 @@
           <td><%= (index + 1) %></td>
           <td><%= product.name %></td>
           <td><%= product.sku %></td>
-          <td>$<%= product.price %></td>
+          <td>₹<%= product.price %></td>
           <td><%= product.category.c_name %></td> <!-- Display associated category -->
           <td>
             <%= link_to 'Show', category_product_path(product.category, product), class: 'btn btn-primary btn-sm' %>

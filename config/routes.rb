@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# config/routes.rb
 
 Rails.application.routes.draw do
   get 'services/about', to: 'services#about'
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :categories do
     resources :products
   end
+
   resources :products do
     resources :orders
   end
@@ -32,12 +33,21 @@ Rails.application.routes.draw do
   end
 
   # Add a route to access all products
-
   resources :orders do
     member do
       get 'generate_pdf'
     end
   end
+
+  resource :cart, only: [:show] do
+    get 'stripe_checkout', to: 'carts#stripe_checkout'
+    post 'stripe_checkout', to: 'carts#stripe_checkout'  # POST for checkout
+    get 'success', to: 'carts#success'
+    get 'cancel', to: 'carts#cancel'
+  end
+ 
+  resources :cart_items, only: [:create, :destroy]
+  resources :orders, only: [:show]
 
   resources :products do
     member do

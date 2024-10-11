@@ -2,29 +2,12 @@
   max-width: 100px;
 }
 
-.app-name {
-  font-size: 2.5rem;
-  font-weight: bold;
-}
-
 .heading h2 {
   font-weight: bold;
 }
 
 .signin-buttons .btn {
   min-width: 250px;
-}
-
-.social-signin .btn {
-  min-width: 220px;
-}
-
-.home-container {
-	background-color: rgb(255 255 255);
-}
-
-.body {
-	background-size:cover;
 }
 
 .divider:after,
@@ -47,6 +30,7 @@
   margin-top: 135px;
 }
 */
+
 /* Styling for the Home Page */
 .home-container {
   background-position: 50% 50%;
@@ -121,21 +105,24 @@ form{
   top: -10px;
 }
 /* Navbar Overlap */
+
 .navbar {
   position: fixed; /* Navbar sticks to the top */
   top: 0;
   width: 100%;
   padding: 0; /* Adjust the top and bottom padding */
   z-index: 1; /* Ensure navbar is on top */
+  background-color: #294863 !important; /* Change this to any color you want */
 }
 
 .navbar-transparent {
-  background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent navbar background */
+  background-color: rgba(44, 62, 80, 0.8) !important; /* Adjust the transparency and color if needed */
 }
 
 .navbar .nav-link, .navbar-brand {
   color: white !important; /* Navbar links in white */
 }
+
 
 
 .capsule-button {

@@ -74,17 +74,14 @@ gem 'prawn', '~> 2.4' # for generating pdfs
 gem 'prawn-table', '~> 0.2.2' # for adding tables to prawn pdfs, -
 # because most reports have tables in them.
 gem 'cancancan', '~> 3.0'
+gem 'cssbundling-rails'
 gem 'faker'
 gem 'letter_opener', group: :development # add this under the development section.
 gem 'money'
 gem 'money-rails'
 gem 'prawn-icon', '~> 3.1' # You may need this if you want to use icons at all
+gem 'rails_admin', '~> 3.2.0'
 gem 'rubocop', require: false
 gem 'rubocop-capybara', '~> 2.21'
 gem 'rubocop-rails', '~> 2.26', '>= 2.26.2'
-
-gem 'rails_admin', '~> 3.2.0'
-gem "cssbundling-rails"
-gem "cssbundling-rails"
 gem 'sassc-rails'
-

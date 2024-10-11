@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # searching
 class SearchController < ApplicationController
   def index

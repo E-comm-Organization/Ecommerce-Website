@@ -81,6 +81,4 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets')
   config.log_level = :debug
-
-
 end

@@ -2,7 +2,7 @@
 
 # app/controllers/categories_controller.rb
 class CategoriesController < ApplicationController
- load_and_authorize_resource # CanCanCan will handle loading and authorization
+  load_and_authorize_resource # CanCanCan will handle loading and authorization
 
   def index
     @categories = Category.all

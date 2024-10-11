@@ -6,16 +6,19 @@
     get 'services/policy', to: 'services#policy'
     get 'services/faq', to: 'services#faq'
     get 'services/career', to: 'services#career'
+  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
+  devise_for :users
 
-    devise_for :users
-
-    resources :services
-    root to: 'home#index'
-    get 'all_products', to: 'products#all_products', as: 'all_products'
-    post 'products/prices', to: 'products#prices'
-    resources :customers, only: %i[new create index]
+  resources :services
+  root to: 'home#index'
+  get 'all_products', to: 'products#all_products', as: 'all_products'
+  post 'products/prices', to: 'products#prices'
+  resources :customers, only: %i[new create index]
 
     get 'search', to: 'search#index', as: 'search'
+  # Add a route to access all products
 
     resources :categories do
       resources :products

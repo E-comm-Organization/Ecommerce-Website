@@ -128,24 +128,21 @@
 </head>
 
 <body>
-  <%# <% if request.path.start_with?("/templates/template1") %> 
-  <%# <%= render 'templates/footer' %> 
-  <%# <% else %> 
   <footer class="footer">
     <div class="container row">
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Our Services</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Visit Website</a></li>
+          <li><a href="<%= services_about_path %>">About Us</a></li>
+          <li><a href="<%= services_service_path %>">Our Services</a></li>
+          <li><a href="<%= services_policy_path %>">Privacy Policy</a></li>
+          <li><a href="<%= services_career_path %>">Careers</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Get Help</h4>
         <ul>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="<%= services_faq_path %>">FAQ</a></li>
           <li><a href="#">Shipping</a></li>
           <li><a href="#">Returns</a></li>
           <li><a href="#">Order Status</a></li>

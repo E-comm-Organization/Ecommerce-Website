@@ -1,6 +1,7 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
-   ## == Devise ==
+RailsAdmin.config do |config|
+  ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
   end
@@ -54,13 +55,13 @@ RailsAdmin.config do |config|
         field :price
         field :mrp
         field :selling_price
-        field :images, :multiple_active_storage  # ActiveStorage for multiple image uploads
+        field :images, :multiple_active_storage # ActiveStorage for multiple image uploads
         field :category
       end
     end
 
     config.model 'Order' do
-      create do 
+      create do
         configure :product_ids
         configure :user_id
         configure :total_amount

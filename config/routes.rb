@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'services/about', to: 'services#about'
-  get 'services/service', to: 'services#service'
-  get 'services/policy', to: 'services#policy'
-  get 'services/faq', to: 'services#faq'
-  get 'services/career', to: 'services#career'
-
+  
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  
   devise_for :users
 
   resources :services

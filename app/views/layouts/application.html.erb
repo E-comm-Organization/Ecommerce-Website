@@ -13,12 +13,11 @@
 	</head>
 
 	<body>
-			<nav class="navbar navbar-expand-lg bg-secondary" style="border-block: 1px solid gray;">
+			<nav class="navbar navbar-expand-lg" style=" background: #505ba0;">
 				<div class="container" >
 					<!-- Application Icon and Name -->
 					<a class="navbar-brand">
 						<img src="<%= asset_path('app_icon.png') %>" width="30" height="30" alt="CRM App Icon">
-						CRM App
 					</a>
 
 					<!-- Toggle button for smaller screens -->
@@ -32,23 +31,29 @@
 							<li class="nav-item">
 								<%= link_to 'Home', root_path, class: 'nav-link' %>
 							</li>
-							<% if user_signed_in? %>
-							<li class="nav-item">
-								<%= link_to 'All Products', all_products_path, class: 'nav-link' %>
-							</li>
 							<li class="nav-item">
 								<%= link_to 'Categories', categories_path, class: 'nav-link' %>
 							</li>
 							<li class="nav-item">
 								<%= link_to 'Orders', orders_path, class: 'nav-link' %>
 							</li>
+							<% if user_signed_in? %> 
 							<% if current_user.role == 'admin' %>
 							<li class="nav-item">
 								<%= link_to 'Customer', customers_path, class: 'nav-link' %>
 							</li>
+							<li class="nav-item">
+								<%= link_to 'All Products', all_products_path, class: 'nav-link' %>
+							</li>
 							<% end %>
 							<% end %>
 						</ul>
+
+						 <form class="search-form" action="<%= search_index_path %>" method="get">
+						    <input class="search-input" type="search" name="q" placeholder="Search" aria-label="Search">
+						    <button class="search-button" type="submit">Search</button>
+						</form>
+
 
 						<!-- Right Side (Login/Profile) -->
 						<ul class="navbar-nav ml-auto">
@@ -61,10 +66,9 @@
 								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 									<%= link_to 'My Profile', edit_user_registration_path, class: 'dropdown-item' %>
 									<%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item',data: { turbo_method: 'delete' }  %>
-									<%#= button_to "Sign out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
 
 								</div>
-								<%# </turbo-frame> %>
+								
 							</li>
 							<% else %>
 							<li class="nav-item" >
@@ -79,6 +83,7 @@
 			<div class="container" style="margin-top: 55px;">
 				<%= yield %>
 			</div>
+				 <%= render "layouts/footer" %>
 
 			<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

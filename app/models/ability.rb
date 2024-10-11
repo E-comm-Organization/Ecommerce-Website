@@ -4,15 +4,15 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
-    if user.admin?
+  def initialize(user = nil) # Allow user to be nil
+    if user.nil? # Check if user is nil (guest)
+      guest_permissions
+    elsif user.admin?
       admin_permissions
     elsif user.salesperson?
       salesperson_permissions
     elsif user.customer?
       customer_permissions(user)
-    else
-      guest_permissions
     end
   end
 

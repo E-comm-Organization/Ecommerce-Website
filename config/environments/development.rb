@@ -79,4 +79,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Store files locally.
   config.active_storage.service = :local
+  config.assets.paths << Rails.root.join('app', 'assets', 'stylesheets')
+  config.log_level = :debug
+
+
 end

@@ -82,3 +82,9 @@ gem 'prawn-icon', '~> 3.1' # You may need this if you want to use icons at all
 gem 'rubocop', require: false
 gem 'rubocop-capybara', '~> 2.21'
 gem 'rubocop-rails', '~> 2.26', '>= 2.26.2'
+
+gem 'rails_admin', '~> 3.2.0'
+gem "cssbundling-rails"
+gem "cssbundling-rails"
+gem 'sassc-rails'
+

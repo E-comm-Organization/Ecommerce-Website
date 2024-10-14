@@ -2,7 +2,11 @@
   <br>
   <h2 class="text-center">Products</h2>
   <br>
+  <% if user_signed_in? %> 
+  <% if current_user.role == 'admin' %>
   <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-primary mb-3' if current_user.admin? %>
+  <% end %>
+  <% end %>
 
   <div class="row">
     <% @products.each do |product| %>
@@ -18,8 +22,8 @@
                 <h5 class="card-title product-name"><%= product.name %></h5>
                 <p class="card-text product-price">₹<%= product.mrp %></p>
                 <div class="mt-auto">
-                  <%= button_to 'Show', [@category, product], class: 'btn btn-sm btn-info' %>
-                  <% if current_user.admin? %>
+                  
+                  <% if current_user&.admin? %>
                     <%= button_to 'Delete', [@category, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
                   <% end %>
                 </div>

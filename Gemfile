@@ -85,3 +85,4 @@ gem 'rubocop', require: false
 gem 'rubocop-capybara', '~> 2.21'
 gem 'rubocop-rails', '~> 2.26', '>= 2.26.2'
 gem 'sassc-rails'
+gem 'stripe'

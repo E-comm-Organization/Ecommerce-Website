@@ -47,9 +47,22 @@ class CartsController < ApplicationController
 
   def success
     @cart = current_user.cart
-
+    
+  # Create a new order for the user
+  order = Order.new(user: current_user)
+  
+  OrderMailer.with(user: current_user, article: @cart).order_confirmation.deliver_now
+  
+  # Add the cart items' products to the order
+  @cart.cart_items.each do |item|
+    order.products << item.product
+  end
+  
+  # Calculate and set the total amount for the order
+  order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
     # Create a new order for the user
     order = Order.new(user: current_user)
+
 
     # Add the cart items' products to the order
     @cart.cart_items.each do |item|

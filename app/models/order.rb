@@ -17,7 +17,7 @@ class Order < ApplicationRecord
   end
 
   def update_total_amount
-    self.total_amount = products.sum(:price)
+    self.total_amount = products.sum(:selling_price)
     save if total_amount_changed?
   end
 end

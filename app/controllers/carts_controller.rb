@@ -49,6 +49,8 @@ def success
   # Create a new order for the user
   order = Order.new(user: current_user)
   
+  OrderMailer.with(user: current_user, article: @cart).order_confirmation.deliver_now
+  
   # Add the cart items' products to the order
   @cart.cart_items.each do |item|
     order.products << item.product

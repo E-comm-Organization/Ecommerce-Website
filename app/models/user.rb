@@ -2,8 +2,9 @@
 
 # app/models/user.rb
 class User < ApplicationRecord
+   has_one :cart, dependent: :destroy
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  :recoverable, :rememberable, :validatable
 
   after_initialize :set_default_role, if: :new_record?
   has_many :orders
@@ -12,6 +13,11 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
+
+
+    def cart
+    Cart.find_or_create_by(user_id: self.id)
+  end
 
   private
 

@@ -1,4 +1,33 @@
-<h2>Order Details</h2>
+<br>
+<h2 class="text-center">Order Details</h2>
+<br>
+<!-- Order Details Content -->
+<div class="order-details">
+  <div class="customer-info">
+    <h3>Customer Details</h3>
+    <p><strong>Email:</strong> <%= @order.user.email %></p>
+    <p><strong>Total Products:</strong> <%= @order.products.count %></p>
+  </div>
+
+  <div class="product-list">
+    <h3>Products</h3>
+    <ul>
+      <% @products.each do |product| %>
+        <li>
+          <span>SKU: <%= product.sku %></span>
+          <span>Price: <%= number_to_currency(product.selling_price, unit: "₹") %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="total-price">
+    <p>Total Amount: <span><%= number_to_currency(@order.total_amount, unit: "₹") %></span></p>
+  </div>
+</div>
+
+
+
 
 <!-- Add custom styles inside a <style> block -->
 <style>
@@ -82,33 +111,3 @@
     color: #28a745;
   }
 </style>
-
-<!-- Order Details Content -->
-<div class="order-details">
-  <div class="order-info">
-    <p><strong>Order No:</strong> <%= @order.id %></p>
-    <p><strong>Total Amount:</strong> <%= number_to_currency(@order.total_amount, unit: "₹") %></p>
-  </div>
-
-  <div class="customer-info">
-    <h3>Customer Details</h3>
-    <p><strong>Email:</strong> <%= @order.user.email %></p>
-    <p><strong>Total Products:</strong> <%= @order.products.count %></p>
-  </div>
-
-  <div class="product-list">
-    <h3>Products</h3>
-    <ul>
-      <% @products.each do |product| %>
-        <li>
-          <span>SKU: <%= product.sku %></span>
-          <span>Price: <%= number_to_currency(product.price, unit: "₹") %></span>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="total-price">
-    <p>Total Amount: <span><%= number_to_currency(@order.total_amount, unit: "₹") %></span></p>
-  </div>
-</div>

@@ -1,8 +1,11 @@
+<br>
 <div class="container mt-5">
   <h1 class="text-center mb-4">Orders Management</h1>
 
   <div class="d-flex justify-content-between mb-3">
+    <% if current_user.admin? %>
     <%= link_to 'Create Order', new_order_path(current_user), class: 'btn btn-primary' %>
+    <% end %>
   </div>
 
   <% if @orders.any? %>
@@ -33,9 +36,11 @@
               <div class="d-inline-block">
                 <%= link_to 'Show', order_path(order), class: 'btn btn-sm btn-info mb-0' %>
               </div>
+              <% if current_user.admin? %>
               <div class="d-inline-block">
                 <%= button_to 'Delete', order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger mb-0' %>
               </div>
+              <%end%>
             </td>
           </tr>
         <% end %>

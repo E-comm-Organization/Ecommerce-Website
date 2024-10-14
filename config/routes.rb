@@ -39,6 +39,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :cart, only: [:show] do
+    get 'stripe_checkout', to: 'carts#stripe_checkout'
+    post 'stripe_checkout', to: 'carts#stripe_checkout'  # POST for checkout
+    get 'success', to: 'carts#success'
+    get 'cancel', to: 'carts#cancel'
+  end
+
+    resources :cart_items, only: [:create, :destroy]
+  resources :orders, only: [:show]
+  
   resources :products do
     member do
       delete :remove_image

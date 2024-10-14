@@ -28,6 +28,7 @@ class Ability
     can :manage, Order
     can :read, Category
     can :all_products, Product
+    can :generate_pdf, Order
   end
 
   def customer_permissions(user)
@@ -37,6 +38,7 @@ class Ability
     can :create, Order
     can :read, Order, user_id: user.id # Customers can only see their own orders
     cannot %i[create update], [Product, Category]
+    can :generate_pdf, Order
   end
 
   def guest_permissions

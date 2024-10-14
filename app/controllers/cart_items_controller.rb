@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/controllers/cart_items_controller.rb
 class CartItemsController < ApplicationController
   before_action :authenticate_user!
 
@@ -19,4 +22,3 @@ class CartItemsController < ApplicationController
     redirect_to cart_path(current_user.cart), notice: 'Product removed from cart.'
   end
 end
-

@@ -24,9 +24,11 @@
                 <div class="mt-auto">
                   
                   <% if current_user&.admin? %>
-                    <%= button_to 'Delete', [@category, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+                  <%= button_to 'Destroy', [@category, product], data: {
+                    turbo_method: :delete,turbo_confirm: "Are you sure?"}, 
+                    class: 'btn btn-sm btn-danger' %>
                   <% end %>
-                </div>
+                  </div>
             </div>
           </div>
         <% end %>

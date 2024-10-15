@@ -5,142 +5,111 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
 
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-}
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+        }
 
-header nav ul li {
-    margin-right: 20px;
-}
+        header nav ul li {
+            margin-right: 20px;
+        }
 
-header nav a {
-    color: #fff;
-    text-decoration: none;
-}
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+        }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-.deals {
-    padding: 20px;
-    margin: 20px;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; /* Center cards */
-}
+        .deals {
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-.deal-card {
-    display: flex;
-    flex-direction: column; /* Keep card contents vertical */
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s; /* Add transition for hover effect */
-    width: calc(33.33% - 20px); /* Default size for multiple cards */
-}
+        .deal-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: calc(100% - 40px);
+        }
 
-/* Make the card bigger if there’s only one */
-.deals > .deal-card:nth-child(1) {
-    flex: 1 1 100%; /* Full width for a single card */
-}
+        /* Card styles for tablets */
+        @media(min-width: 600px) {
+            .deal-card {
+                width: calc(50% - 40px);
+            }
+        }
 
-/* Adjust card width for two cards */
-.deals > .deal-card:nth-child(n+2):nth-child(-n+3) {
-    flex: 1 1 calc(50% - 20px); /* 2 cards per row */
-}
+        /* Card styles for larger screens */
+        @media(min-width: 1024px) {
+            .deal-card {
+                width: calc(33.33% - 40px);
+            }
+        }
 
-/* Adjust card width for three or more cards */
-.deals > .deal-card:nth-child(n+4) {
-    flex: 1 1 calc(33.33% - 20px); /* 3 or more cards per row */
-}
+        .deal-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
-/* Card image styling */
-.deal-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
+        .deal-card h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-/* Card heading styling */
-.deal-card h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
+        .deal-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
 
+        .deal-card button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
+        .deal-card button:hover {
+            background-color: #555;
+        }
 
-.image-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.image-links a {
-    flex-basis: calc(50% - 10px); /* Ensure 2 items per row with a gap */
-}
-
-.image-links img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-
-.deal-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.deal-card h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.deal-card p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.deal-card button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.deal-card button:hover {
-    background-color: #555;
-}
+        h2 {
+            text-align: center;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -151,7 +120,7 @@ main {
             <div class="deal-card">
               <% if category.image.attached? %>
                 <a href="<%= category_products_path(category) %>">
-                  <%= image_tag(category.image, class: "img-fluid rounded", alt: category.c_name, style:"min-width: 350px;") %>
+                  <%= image_tag(category.image, class: "img-fluid rounded", alt: category.c_name, style:"min-width: 280px;") %>
                 </a>
               <% end %>
               <h3><%= category.c_name %></h3>

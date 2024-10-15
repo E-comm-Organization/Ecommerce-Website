@@ -47,30 +47,14 @@ class CartsController < ApplicationController
 
   def success
     @cart = current_user.cart
-    
-  # Create a new order for the user
-  order = Order.new(user: current_user)
-  
-  OrderMailer.with(user: current_user, article: @cart).order_confirmation.deliver_now
-  
-  # Add the cart items' products to the order
-  @cart.cart_items.each do |item|
-    order.products << item.product
-  end
-  
-  # Calculate and set the total amount for the order
-  order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
+    order = build_order
+    send_order_confirmation
+    add_products_to_order(order)
+    calculate_total_ammount
     # Create a new order for the user
     order = Order.new(user: current_user)
 
-
-    # Add the cart items' products to the order
-    @cart.cart_items.each do |item|
-      order.products << item.product
-    end
-
-    # Calculate and set the total amount for the order
-    order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
+    add_products_to_order(order)
 
     if order.save
       # Clear the cart after the order is created
@@ -85,5 +69,25 @@ class CartsController < ApplicationController
 
   def cancel
     redirect_to cart_path(current_user.cart), alert: 'Payment canceled.'
+  end
+
+  private
+
+  def build_order
+    Order.new(user: current_user)
+  end
+
+  def send_order_confirmation
+    OrderMailer.with(user: current_user, article: @cart).order_confirmation.deliver_now
+  end
+
+  def add_products_to_order(order)
+    @cart.cart_items.each do |item|
+      order.products << item.product
+    end
+  end
+
+  def calculate_total_ammount
+    order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
   end
 end

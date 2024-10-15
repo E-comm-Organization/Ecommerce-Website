@@ -50,12 +50,13 @@ class CartsController < ApplicationController
     order = build_order
     send_order_confirmation
     add_products_to_order(order)
-    calculate_total_ammount
+
     # Create a new order for the user
     order = Order.new(user: current_user)
 
     add_products_to_order(order)
 
+    order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
     if order.save
       # Clear the cart after the order is created
       @cart.cart_items.destroy_all
@@ -85,9 +86,5 @@ class CartsController < ApplicationController
     @cart.cart_items.each do |item|
       order.products << item.product
     end
-  end
-
-  def calculate_total_ammount
-    order.total_amount = @cart.cart_items.sum { |item| item.product.selling_price * item.quantity }
   end
 end

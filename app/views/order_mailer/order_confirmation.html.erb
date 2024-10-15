@@ -1,8 +1,1 @@
 <h1> Hello </h1>
-<% @products do |product| %>
-<% if product.images.attached? %>
-              <%= image_tag product.images.first, class: "card-img-top", alt: product.name, style: "height: 200px; object-fit: cover;" %>
-            <% else %>
-              <%= image_tag 'placeholder.jpg', class: "card-img-top", alt: 'Placeholder image', style: "height: 200px; object-fit: cover;" %>
-            <% end %>
-<% end %>

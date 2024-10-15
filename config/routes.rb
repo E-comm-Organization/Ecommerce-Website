@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   get 'services/about', to: 'services#about'
   get 'services/service', to: 'services#service'
@@ -59,3 +60,5 @@ Rails.application.routes.draw do
     end
   end
 end
+
+# rubocop:enable Metrics/BlockLength

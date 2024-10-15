@@ -15,14 +15,17 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @category = Category.find(params[:category_id])
     @product = @category.products.find(params[:id])
   end
 
   def new
+    @category = Category.find(params[:category_id])
     @product = @category.products.new
   end
 
   def create
+    @category = Category.find(params[:category_id])
     @product = @category.products.new(product_params)
     if @product.save
       redirect_to [@category, @product], notice: 'Product was successfully created.'
@@ -32,12 +35,14 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = @category.products.find(params[:id]) # Find the existing product
+    @category = Category.find(params[:category_id])
+    @product = @category.products.find(params[:id])
   end
 
   def update
-    @product = @category.products.find(params[:id]) # Find the existing product
-    if @product.update(product_params) # Update the product with the new attributes
+    @category = Category.find(params[:category_id])
+    @product = @category.products.find(params[:id])
+    if @product.update(product_params)
       redirect_to [@category, @product], notice: 'Product was successfully updated.'
     else
       render :edit
@@ -45,9 +50,10 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = @category.products.find(params[:id]) # Find the existing product
+    @category = Category.find(params[:category_id])
+    @product = @category.products.find(params[:id])
     @product.destroy
-    redirect_to products_url, notice: 'Product was successfully destroyed.'
+    redirect_to category_products_path(@category), notice: 'Product was successfully destroyed.'
   end
 
   def remove_image

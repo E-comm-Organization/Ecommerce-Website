@@ -23,11 +23,7 @@
                 <p class="card-text product-price">₹<%= product.mrp %></p>
                 <div class="mt-auto">
                   
-                  <% if current_user&.admin? %>
-                  <%= button_to 'Destroy', [@category, product], data: {
-                    turbo_method: :delete,turbo_confirm: "Are you sure?"}, 
-                    class: 'btn btn-sm btn-danger' %>
-                  <% end %>
+                 
                   </div>
             </div>
           </div>

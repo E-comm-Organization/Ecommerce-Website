@@ -2,7 +2,7 @@
 
 # app/controllers/products_controller.rb
 class ProductsController < ApplicationController
-  before_action :set_category, only: %i[index show new create edit update destroy]
+  before_action :set_category, only: %i[index show new create edit update destroy], if: -> { params[:category_id].present? }
   skip_before_action :verify_authenticity_token, only: [:prices]
   load_and_authorize_resource # CanCanCan will handle loading and authorization
   def all_products
@@ -15,8 +15,13 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:category_id])
-    @product = @category.products.find(params[:id])
+    if params[:category_id].present?
+      @category = Category.find(params[:category_id])
+      @product = @category.products.find(params[:id])
+    else
+      @product = Product.find(params[:id])
+      @category = @product.category  # This assumes you have a relationship in your Product model
+    end
   end
 
   def new

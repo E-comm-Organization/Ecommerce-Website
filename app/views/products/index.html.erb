@@ -1,18 +1,18 @@
 <div class="container mt-4">
   <br>
-  <h2 class="text-center">Products</h2>
+  <h2 class="text-center text-primary">Our Products</h2> <!-- Changed heading color -->
   <br>
   <% if user_signed_in? %> 
-  <% if current_user.role == 'admin' %>
-  <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-primary mb-3' if current_user.admin? %>
-  <% end %>
+    <% if current_user.role == 'admin' %>
+      <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-success mb-3' %> <!-- Changed button color -->
+    <% end %>
   <% end %>
 
-  <div class="row">
+  <div class="row justify-content-center">
     <% @products.each do |product| %>
       <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
         <%= link_to [@category, product], class: 'card-link', style: "width: 100%; text-decoration: none;" do %>
-          <div class="card shadow-sm" style="min-height: 350px;">
+          <div class="card shadow-sm border-light" style="min-height: 350px; border-radius: 10px; overflow: hidden;">
             <% if product.images.attached? %>
               <%= image_tag product.images.first, class: "card-img-top", alt: product.name, style: "height: 200px; object-fit: cover;" %>
             <% else %>
@@ -21,10 +21,6 @@
             <div class="card-body d-flex flex-column text-center">
                 <h5 class="card-title product-name"><%= product.name %></h5>
                 <p class="card-text product-price">₹<%= product.mrp %></p>
-                <div class="mt-auto">
-                  
-                 
-                  </div>
             </div>
           </div>
         <% end %>
@@ -32,10 +28,8 @@
     <% end %>
   </div>
 </div>
+
 <style>
-
-
-
   .card {
     transition: transform 0.3s, box-shadow 0.3s;
     min-height: 350px;
@@ -47,32 +41,40 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
-  .card img {
-    height: 200px;
-    object-fit: cover;
-  }
-
-    .product-name {
-    font-size: 1.25rem; /* Increase the font size */
-    font-weight: bold;  /* Make the name bold */
-    color: #333;        /* Darker color for better contrast */
+  .product-name {
+    font-size: 1.5rem;  /* Increased font size */
+    font-weight: bold;  
+    color: #333;        
     margin-bottom: 0.5rem;
-    text-transform: capitalize; /* Capitalize product names */
+    text-transform: capitalize; 
   }
 
   .product-price {
-    font-size: 1.1rem;   /* Slightly larger than normal text */
-    color: #28a745;      /* Green color to emphasize the price */
-    font-weight: 600;    /* Medium font weight for emphasis */
-    margin-bottom: 1rem; /* Add space between price and buttons */
-  }
-
-  .card-title, .card-text {
-    margin: 0;
+    font-size: 1.3rem;   /* Increased font size */
+    color: #28a745;      
+    font-weight: 600;    
+    margin-bottom: 1rem;
   }
 
   .btn-danger {
-    font-size: 0.875rem; /* Slightly smaller font for delete button */
+    font-size: 0.875rem;
   }
 
+  /* Center the row when there's only one or two cards */
+  .row {
+    justify-content: center;
+  }
+
+  /* For 2 cards */
+  .row > .col-lg-3:nth-of-type(1),
+  .row > .col-lg-3:nth-of-type(2) {
+    justify-content: space-between;
+  }
+
+  /* When there are more than 3 cards, align left */
+  @media (min-width: 992px) {
+    .row {
+      justify-content: flex-start;
+    }
+  }
 </style>

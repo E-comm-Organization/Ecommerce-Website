@@ -12,24 +12,16 @@
             <% if @product.images.attached? %>
               <% @product.images.each_with_index do |image, index| %>
                 <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <%= image_tag(image, class: "img-fluid rounded") %>
+                  <div class="image-container"> <!-- New image container for enforcing aspect ratio -->
+                    <%= image_tag(image, class: "img-fluid rounded", style: "object-fit: cover;") %>
+                  </div>
                 </div>
               <% end %>
             <% end %>
           </div>
-          <!-- Carousel Controls -->
-          <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
       </div>
 
-      <!-- Product Details -->
       <div class="col-md-6">
         <div class="price-details">
           <p class="price">₹<%= @product.selling_price %></p>
@@ -37,22 +29,18 @@
         </div>
         <h5 class="size">Size: <span><%= @product.size %></span></h5>
         <h3 class="offers-title">Available Offers</h3>
-        <ul class="offers-list">
-          <li>Special Price: Get extra 30% off</li>
-          <li>Combo Offer: Buy 2 items, save 3%</li>
-          <li>Bank Offer: 5% Unlimited Cashback on Flipkart Axis Bank Credit Card</li>
-        </ul>
+          <p class="offers"><%= @product.offer %></p>
+        <p class="description"><%= @product.description %></p>
         <!-- Action Buttons -->
         <div class="mt-4">
           <%= button_to '⚡Buy Now', cart_items_path(product_id: @product.id), method: :post,class: 'btn btn-primary btn-lg btn-block mt-2 shadow' %>
-
         </div>
 
         <!-- Edit and Back to Products -->
         <div class="mt-4 d-flex justify-content-center">
           <% if current_user&.admin? %>
           <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm mr-2 shadow' %>
-                  <%= link_to 'Destroy', [@category, @product], data: {
+           <%= link_to 'Destroy', [@category, @product], data: {
                     turbo_method: :delete,turbo_confirm: "Are you sure?"}, 
                     class: 'btn btn-sm btn-danger' %>
           <% end %>
@@ -62,8 +50,23 @@
   </div>
 </body>
 
+<!-- CSS Styles -->
 <style>
+  .image-container {
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    position: relative;
+    overflow: hidden;
+  }
 
+  .image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container without distortion */
+  }
 
   .product-name {
     font-size: 2.5rem;
@@ -71,7 +74,6 @@
     color: #343a40;
   }
 
-  /* Price Styling */
   .price-details {
     display: flex;
     align-items: baseline;
@@ -90,15 +92,12 @@
     text-decoration: line-through;
   }
 
-
-  /* Offers Styling */
   .offers-title {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: #28a745;
   }
 
-  /* Button Styling */
   .btn {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
@@ -113,7 +112,6 @@
     box-shadow: 0 4px 8px rgba(0, 86, 179, 0.2);
   }
 
-  /* General Spacing and Shadows */
   .shadow-lg {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }

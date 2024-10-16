@@ -11,6 +11,7 @@
 		<%= javascript_importmap_tags %>
 		<%= favicon_link_tag 'fg.png' %>
 		<style>
+
 			img{
 				border-radius: 15px;
 				position: relative;
@@ -21,12 +22,8 @@
 	</head>
 
 	<body>
-			<nav class="navbar navbar-expand-lg" style=" background: #505ba0;">
+			<nav class="navbar navbar-expand-lg" style=" background: #6E6E6E;">
 				<div class="container" >
-					<!-- Application Icon and Name -->
-					<a class="navbar-brand">
-						<img src="<%= asset_path('fg.png') %>" width="30" height="30" alt="CRM App Icon">
-					</a>
 
 					<!-- Toggle button for smaller screens -->
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +39,14 @@
 							<li class="nav-item">
 								<%= link_to 'Orders', orders_path, class: 'nav-link' %>
 							</li>
+							<% unless current_user&.admin? %>
+							<li class="nav-item">
+								<%= link_to 'About', services_about_path, class: 'nav-link' %>
+							</li>
+							<li class="nav-item">
+								<%= link_to 'Services', services_service_path, class: 'nav-link' %>
+							</li>
+							<% end %>
 							<% if user_signed_in? %> 
 							<% if current_user.role == 'admin' %>
 							<li class="nav-item">
@@ -57,7 +62,13 @@
 							<% end %>
 						</ul>
 						 <form class="search-form" action="<%= search_path %>" method="get">
-   <input class="search-input" type="search" name="q" placeholder="Search" aria-label="Search">
+						 	<select name="category" class="form-control" style="width: 150px; padding: 5px; height: auto;">
+          		<option value="">All Categories</option>
+         			 <% Category.all.each do |category| %>
+            		<option value="<%= category.c_name %>"><%= category.c_name %></option>
+          			<% end %>
+        			</select>
+   							<input class="search-input" type="search" name="q" placeholder="Search" aria-label="Search">
 						    <button class="search-button" type="submit">Search</button>
 						</form>
 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'services/policy', to: 'services#policy'
   get 'services/faq', to: 'services#faq'
   get 'services/career', to: 'services#career'
-
+  
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users

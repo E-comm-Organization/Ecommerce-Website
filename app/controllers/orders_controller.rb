@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
   load_and_authorize_resource # CanCanCan will handle loading and authorization
   before_action :set_order, only: %i[show edit update destroy generate_pdf] # Load order for specific actions
   before_action :set_products, only: %i[new edit create update] # Fetch all products for selection
-
+  
+  
   def index
     @orders = current_user.admin? ? Order.all : current_user.orders
   end

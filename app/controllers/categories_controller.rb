@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# app/controllers/categories_controller.rb
+# Working for Category
 class CategoriesController < ApplicationController
   load_and_authorize_resource # CanCanCan will handle loading and authorization
 
@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @products = @category.products # Ensure that the association is defined correctly in the model
+    @products = @category.products # Display products for the selected category
   end
 
   def new
@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(parems[:id])
+    @category = Category.find(params[:id]) # Fixed typo here
   end
 
   def update

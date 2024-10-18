@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
   def index
     @category = Category.find(params[:category_id])
     @products = @category.products
+    @products = @category.products.page(params[:page]).per(12)
   end
 
   def show

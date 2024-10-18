@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.1.1'
+ruby '3.0.0'
 gem 'kaminari'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

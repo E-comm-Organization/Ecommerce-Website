@@ -1,44 +1,100 @@
 <div class="container mt-4">
   <br>
-  <h2 class="text-center text-primary">Our Products</h2> <!-- Changed heading color -->
+  <h1 class="text-center">Our Products</h1> <!-- Changed heading color -->
   <br>
   <% if user_signed_in? %> 
-    <% if current_user.role == 'admin' %>
-      <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn btn-success mb-3' %> <!-- Changed button color -->
-    <% end %>
+  <% if current_user.role == 'admin' %>
+  <%= link_to 'Add Product', new_category_product_path(@category), class: 'btn mb-3' %> <!-- Changed button color -->
+  <% end %>
   <% end %>
 
   <div class="row justify-content-center">
     <% @products.each do |product| %>
-      <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
-        <%= link_to [@category, product], class: 'card-link', style: "width: 100%; text-decoration: none;" do %>
-          <div class="card shadow-sm border-light" style="min-height: 350px; border-radius: 10px; overflow: hidden;">
-            <% if product.images.attached? %>
-              <%= image_tag product.images.first, class: "card-img-top", alt: product.name, style: "height: 200px; object-fit: cover;" %>
-            <% else %>
-              <%= image_tag 'placeholder.jpg', class: "card-img-top", alt: 'Placeholder image', style: "height: 200px; object-fit: cover;" %>
-            <% end %>
-            <div class="card-body d-flex flex-column text-center">
-                <h5 class="card-title product-name"><%= product.name %></h5>
-                <p class="card-text product-price">₹<%= product.mrp %></p>
-            </div>
-          </div>
+    <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
+      <%= link_to [@category, product], class: 'card-link', style: "width: 100%; text-decoration: none;" do %>
+      <div class="card shadow-sm border-light" style="min-height: 350px; border-radius: 10px; overflow: hidden;">
+        <% if product.images.attached? %>
+        <%= image_tag product.images.first, class: "card-img-top", alt: product.name, style: "height: 200px; object-fit: cover;" %>
+        <% else %>
+        <%= image_tag 'placeholder.jpg', class: "card-img-top", alt: 'Placeholder image', style: "height: 200px; object-fit: cover;" %>
         <% end %>
+        <div class="card-body d-flex flex-column text-center">
+          <h5 class="card-title product-name"><%= product.name %></h5>
+          <p class="card-text product-price">₹<%= product.mrp %></p>
+          <p class="card-text product-description"><%= truncate(product.description, length: 50) %></p> <!-- Added product description -->
+        </div>
+
       </div>
+      <% end %>
+    </div>
     <% end %>
+
   </div>
+  <br>
+  <br>
+      <!-- Pagination links -->
+      <div class="pagination-links text-center">
+        <%= paginate @products %>
+      </div>
+
 </div>
 
 <style>
+
+   }
+
+        .pagination-links {
+          text-align: center;
+          margin-top: 20px;
+
+      }
+
+      .pagination {
+          display: inline-block;
+          padding-left: 0;
+          margin: 0;
+          border-radius: 10px;
+      }
+
+      .pagination a{
+                  color: black;
+          padding: 6px 16px;
+          text-decoration: none;
+          margin: 0 4px;
+      }
+      .pagination span {
+          color: black;
+          padding: 6px 16px;
+          text-decoration: none;
+          margin: 0 4px;
+          
+      }
+
+      .pagination a:hover {
+          background-color: #BCFD4C;
+          color: black;
+      }
+
+
+  .mb-3{
+    color: black;
+    background-color: #BCFD4C;
+  }
   .card {
     transition: transform 0.3s, box-shadow 0.3s;
     min-height: 350px;
     cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
   .card:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .product-description {
+    font-size: 1rem;   /* Font size */
+    color: #555;       /* Text color */
+    margin-bottom: 1rem;
   }
 
   .product-name {

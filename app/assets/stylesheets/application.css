@@ -109,10 +109,6 @@
   font-size: 1.1rem;
 }
 
-h1, p {
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5); /* Add subtle shadow for readability */
-}
-
 ul{
   padding-bottom: 20px;
 }

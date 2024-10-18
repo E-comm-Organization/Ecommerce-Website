@@ -1,239 +1,298 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CrmApp</title>
+<head>
+  <title>Ecommerce</title>
 
-    <!-- Meta tag to make the page responsive on all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Meta tag to make the page responsive on all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF meta tags for security -->
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <!-- CSRF meta tags for security -->
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <!-- Bootstrap CSS for styling -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    />
+  <!-- Bootstrap CSS for styling -->
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  />
 
-    <!-- Link to custom stylesheets -->
-    <%= stylesheet_link_tag "custom", media: "all", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+/>
 
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+  <!-- Link to custom stylesheets -->
+  <%= stylesheet_link_tag "custom", media: "all", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-    <!-- Importmap for managing JavaScript imports -->
-    <%= javascript_importmap_tags %>
+  <!-- Font Awesome for icons -->
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
 
-    <!-- Favicon for the app -->
-    <%= favicon_link_tag 'fg.png' %>
+  <!-- Importmap for managing JavaScript imports -->
+  <%= javascript_importmap_tags %>
 
-    <!-- Additional inline styles -->
-    <style>
-      /* Style for all images with rounded corners and slight bottom positioning */
-      img {
-        border-radius: 15px;
-        position: relative;
-        bottom: 5px;
-      }
+  <!-- Favicon for the app -->
+  <%= favicon_link_tag 'fg.png' %>
 
-      /* Custom styling for the cart notification icon */
-      .cart-wrapper {
-        position: relative;
-        display: inline-block;
-      }
+  <!-- Additional inline styles -->
+  <style>
+    /* Style for all images with rounded corners and slight bottom positioning */
+    img {
+      border-radius: 15px;
+      position: relative;
+      bottom: 5px;
+    }
 
-      .cart-icon {
-        width: 30px; /* Adjust the width of the cart icon */
-      }
+    /* Custom styling for the cart notification icon */
+    .cart-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
-      .cart-notification {
-        position: absolute;
-        top: -8px; /* Position it near the top of the cart icon */
-        right: -8px;
-        background-color: red;
-        color: white;
-        border-radius: 50%;
-        padding: 2px 6px;
-        font-size: 12px;
-        font-weight: bold;
-      }
-    </style>
-  </head>
+    .cart-icon {
+      width: 30px; /* Adjust the width of the cart icon */
+    }
 
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg" style="background: #6E6E6E;">
-      <div class="container">
-        <!-- Toggle button for mobile views -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarContent"
-          aria-controls="navbarContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon">=</span>
+    .cart-notification {
+      position: absolute;
+      top: -8px; /* Position it near the top of the cart icon */
+      right: -8px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+
+    /* Container for search form */
+    .search-container {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f3f3f3;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+  /* Category dropdown styling */
+  .category-dropdown {
+    border: none;
+    border-radius: 8px 0 0 8px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #f3f3f3;
+    outline: none;
+  }
+
+  /* Search input field styling */
+  .search-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    background-color: #f3f3f3;
+    outline: none;
+  }
+
+  /* Search button styling */
+  .search-button {
+    background-color: #BCFD4C;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+  }
+
+  .search-button i {
+    color: black;
+    font-size: 18px;
+  }
+
+</style>
+</head>
+
+<body style="background-color: #f7f7f9">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg" style="background: black;">
+    <div class="container">
+      <!-- Toggle button for mobile views -->
+      <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+      >
+      <span class="navbar-toggler-icon">=</span>
+    </button>
+
+    <!-- Navbar content (links and forms) -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Left-aligned links for different sections -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <!-- Link to the homepage -->
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <!-- Link to Orders page -->
+          <%= link_to 'Orders', orders_path, class: 'nav-link' %>
+        </li>
+
+        <!-- Links only visible if the current user is not an admin -->
+        <% unless current_user&.admin? %>
+        <li class="nav-item">
+          <!-- Link to the About page -->
+          <%= link_to 'About', services_about_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <!-- Link to the Services page -->
+          <%= link_to 'Services', services_service_path, class: 'nav-link' %>
+        </li>
+        <% end %>
+
+        <!-- Additional links for signed-in users -->
+        <% if user_signed_in? %>
+        <% if current_user.role == 'admin' %>
+        <li class="nav-item">
+          <!-- Link to Categories (admin only) -->
+          <%= link_to 'Categories', categories_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <!-- Link to Customers (admin only) -->
+          <%= link_to 'Customer', customers_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <!-- Link to All Products (admin only) -->
+          <%= link_to 'All Products', all_products_path, class: 'nav-link' %>
+        </li>
+        <% end %>
+        <% end %>
+      </ul>
+
+      <!-- Search form -->
+      <!-- Search form -->
+      <form class="search-form" action="<%= search_path %>" method="get">
+        <div class="search-container">
+          <!-- Dropdown to select category for search -->
+          <select
+          name="category"
+          class="category-dropdown"
+          style="width: auto; height: 40px;"
+          >
+          <option value="">All Categories</option>
+          <% Category.all.each do |category| %>
+          <option value="<%= category.c_name %>"><%= category.c_name %></option>
+          <% end %>
+        </select>
+
+        <!-- Input for search query -->
+        <input
+        class="search-input"
+        type="search"
+        name="q"
+        placeholder="Search "
+        aria-label="Search"
+        style="height: 40px;"
+        />
+
+        <!-- Submit button for the search form -->
+        <button class="search-button" type="submit">
+          <i class="fa fa-search"></i>
         </button>
-
-        <!-- Navbar content (links and forms) -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!-- Left-aligned links for different sections -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <!-- Link to the homepage -->
-              <%= link_to 'Home', root_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <!-- Link to Orders page -->
-              <%= link_to 'Orders', orders_path, class: 'nav-link' %>
-            </li>
-
-            <!-- Links only visible if the current user is not an admin -->
-            <% unless current_user&.admin? %>
-            <li class="nav-item">
-              <!-- Link to the About page -->
-              <%= link_to 'About', services_about_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <!-- Link to the Services page -->
-              <%= link_to 'Services', services_service_path, class: 'nav-link' %>
-            </li>
-            <% end %>
-
-            <!-- Additional links for signed-in users -->
-            <% if user_signed_in? %>
-            <% if current_user.role == 'admin' %>
-            <li class="nav-item">
-              <!-- Link to Categories (admin only) -->
-              <%= link_to 'Categories', categories_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <!-- Link to Customers (admin only) -->
-              <%= link_to 'Customer', customers_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <!-- Link to All Products (admin only) -->
-              <%= link_to 'All Products', all_products_path, class: 'nav-link' %>
-            </li>
-            <% end %>
-            <% end %>
-          </ul>
-
-          <!-- Search form -->
-          <form class="search-form" action="<%= search_path %>" method="get">
-            <!-- Dropdown to select category for search -->
-            <select
-              name="category"
-              class="form-control"
-              style="width: 150px; padding: 5px; height: auto;"
-            >
-              <option value="">All Categories</option>
-              <% Category.all.each do |category| %>
-              <option value="<%= category.c_name %>"><%= category.c_name %></option>
-              <% end %>
-            </select>
-
-            <!-- Input for search query -->
-            <input
-              class="search-input"
-              type="search"
-              name="q"
-              placeholder="Search"
-              aria-label="Search"
-            />
-
-            <!-- Submit button for the search form -->
-            <button class="search-button" type="submit">Search</button>
-          </form>
-
-          <!-- Right side (profile/login) -->
-          <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-            <li class="nav-item dropdown">
-              <!-- Dropdown for user profile -->
-              <a
-                class="nav-link dropdown-toggle"
-                id="userDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fas fa-user"></i> Profile
-              </a>
-
-              <!-- Dropdown menu items for the profile -->
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <%= link_to 'My Profile', edit_user_registration_path, class: 'dropdown-item' %>
-                <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item', data: { turbo_method: 'delete' } %>
-              </div>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <!-- Link to the login page if not signed in -->
-              <%= link_to 'Log in', new_user_session_path, class: 'nav-link' %>
-            </li>
-            <% end %>
-          </ul>
-
-          <!-- Cart icon and notification for signed-in users -->
-          <% if current_user %>
-          <%= link_to cart_path(current_user.cart), class: 'nav-link cart-link' do %>
-          <div class="cart-wrapper">
-            <%= image_tag('cart.png', alt: 'Cart', class: 'cart-icon') %>
-            <% if current_user.cart.cart_items.distinct.count(:product_id) > 0 %>
-            <span class="cart-notification">
-              <%= current_user.cart.cart_items.distinct.count(:product_id) %>
-            </span>
-            <% end %>
-          </div>
-          <% end %>
-          <% end %>
-        </div>
       </div>
-    </nav>
+    </form>
 
-    <!-- Main content container -->
-    <div class="container" style="margin-top: 55px;">
-      <%= yield %>
-    </div>
 
-    <!-- Footer partial -->
-    <%= render "layouts/footer" %>
+    <!-- Right side (profile/login) -->
+    <ul class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+      <li class="nav-item dropdown">
+        <!-- Dropdown for user profile -->
+        <a
+        class="nav-link dropdown-toggle"
+        id="userDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        >
+        <i class="fas fa-user"></i> Profile
+      </a>
 
-    <!-- Bootstrap and other required scripts -->
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+      <!-- Dropdown menu items for the profile -->
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <%= link_to 'My Profile', edit_user_registration_path, class: 'dropdown-item' %>
+        <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'dropdown-item', data: { turbo_method: 'delete' } %>
+      </div>
+    </li>
+    <% else %>
+    <li class="nav-item">
+      <!-- Link to the login page if not signed in -->
+      <%= link_to 'Log in', new_user_session_path, class: 'nav-link' %>
+    </li>
+    <% end %>
+  </ul>
 
-    <script>
+  <!-- Cart icon and notification for signed-in users -->
+  <% if current_user %>
+  <%= link_to cart_path(current_user.cart), class: 'nav-link cart-link' do %>
+  <div class="cart-wrapper">
+    <%= image_tag('cart.png', alt: 'Cart', class: 'cart-icon') %>
+    <% if current_user.cart.cart_items.distinct.count(:product_id) > 0 %>
+    <span class="cart-notification">
+      <%= current_user.cart.cart_items.distinct.count(:product_id) %>
+    </span>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+</div>
+</nav>
+
+<!-- Main content container -->
+<div class="container" style="margin-top: 55px;">
+  <%= yield %>
+</div>
+
+<!-- Footer partial -->
+<%= render "layouts/footer" %>
+
+<!-- Bootstrap and other required scripts -->
+<script
+src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"
+></script>
+
+<script>
       // Reinitialize Bootstrap dropdowns after Turbo page load
-      document.addEventListener("turbo:load", function () {
-        const dropdowns = document.querySelectorAll(".dropdown-toggle");
-        dropdowns.forEach((dropdown) => {
-          new bootstrap.Dropdown(dropdown);
-        });
-      });
-    </script>
+  document.addEventListener("turbo:load", function () {
+    const dropdowns = document.querySelectorAll(".dropdown-toggle");
+    dropdowns.forEach((dropdown) => {
+      new bootstrap.Dropdown(dropdown);
+    });
+  });
+</script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+<script
+src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"
+></script>
+</body>
 </html>

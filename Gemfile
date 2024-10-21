@@ -87,3 +87,10 @@ gem 'rubocop-capybara', '~> 2.21'
 gem 'rubocop-rails', '~> 2.26', '>= 2.26.2'
 gem 'sassc-rails'
 gem 'stripe'
+
+# Google SSO
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
+gem 'dotenv-rails'

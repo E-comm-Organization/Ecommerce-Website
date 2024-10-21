@@ -1,9 +1,6 @@
 <body>
   <div class="container mt-4">
-    <br>
     <h1 class="mb-4 text-center product-name"><%= @product.name %></h1>
-    <br>
-    <br>
     <div class="row">
       <!-- Product Image Carousel -->
       <div class="col-md-6">
@@ -12,13 +9,18 @@
             <% if @product.images.attached? %>
               <% @product.images.each_with_index do |image, index| %>
                 <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <div class="image-container"> <!-- New image container for enforcing aspect ratio -->
+                  <div class="image-container">
                     <%= image_tag(image, class: "img-fluid rounded", style: "object-fit: cover;") %>
                   </div>
                 </div>
               <% end %>
             <% end %>
           </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-4">
+          <%= button_to '⚡Buy Now', cart_items_path(product_id: @product.id), method: :post, class: 'btn btn-primary btn-lg btn-block mt-2 shadow' %>
         </div>
       </div>
 
@@ -28,35 +30,48 @@
           <p class="original-price">₹<%= @product.mrp %></p>
         </div>
         <h5 class="size">Size: <span><%= @product.size %></span></h5>
-        <h3 class="offers-title">Available Offers</h3>
-          <p class="offers"><%= @product.offer %></p>
+        <h3>Available Offers</h3>
+        <p class="offers"><%= @product.offer %></p>
+        <h3>Product Details</h3>
         <p class="description"><%= @product.description %></p>
-        <!-- Action Buttons -->
-        <div class="mt-4">
-          <%= button_to '⚡Buy Now', cart_items_path(product_id: @product.id), method: :post,class: 'btn btn-primary btn-lg btn-block mt-2 shadow' %>
-        </div>
 
-        <!-- Edit and Back to Products -->
-        <div class="mt-4 d-flex justify-content-center">
-          <% if current_user&.admin? %>
-          <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning btn-sm mr-2 shadow' %>
-           <%= link_to 'Destroy', [@category, @product], data: {
-                    turbo_method: :delete,turbo_confirm: "Are you sure?"}, 
-                    class: 'btn btn-sm btn-danger' %>
-          <% end %>
-        </div>
+        <!-- Edit and Delete Buttons for Admin -->
+        <% if current_user&.admin? %>
+          <div class="mt-4">
+            <%= link_to 'Edit Product', edit_category_product_path(@category, @product), class: 'btn btn-warning mr-2 shadow', style: 'width: 150px;' %>
+            <%= link_to 'Destroy', [@category, @product], data: {
+                      turbo_method: :delete,turbo_confirm: "Are you sure?"}, 
+                      class: 'btn btn-danger shadow', style: 'width: 150px;' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
 </body>
 
-<!-- CSS Styles -->
+<!-- Enhanced CSS Styles -->
 <style>
+  /* Global settings for typography */
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #343a40;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Image carousel aspect ratio container */
   .image-container {
     width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    padding-top: 56.25%;
     position: relative;
     overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
   }
 
   .image-container img {
@@ -65,13 +80,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the entire container without distortion */
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .image-container:hover {
+    transform: scale(1.02);
   }
 
   .product-name {
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 2.8rem;
+    font-weight: 700;
     color: #343a40;
+    letter-spacing: -0.5px;
   }
 
   .price-details {
@@ -81,43 +102,86 @@
   }
 
   .price {
-    font-size: 32px;
-    color: #b12704;
-    font-weight: bold;
+    font-size: 2.5rem;
+    color: #e63946;
+    font-weight: 600;
   }
 
   .original-price {
-    font-size: 18px;
+    font-size: 1.25rem;
     color: #757575;
     text-decoration: line-through;
   }
 
   .offers-title {
     font-size: 1.5rem;
-    margin-bottom: 10px;
     color: #28a745;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    color: #495057;
   }
 
   .btn {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 1.2rem;
   }
 
-  .btn-success:hover {
-    background-color: #218838;
-    box-shadow: 0 4px 8px rgba(33, 136, 56, 0.2);
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
   }
 
   .btn-primary:hover {
     background-color: #0056b3;
-    box-shadow: 0 4px 8px rgba(0, 86, 179, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.2);
   }
 
+  .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+
+  .btn-warning:hover {
+    background-color: #e0a800;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .product-name {
+      font-size: 2rem;
+    }
+
+    .price {
+      font-size: 2rem;
+    }
+
+    .image-container {
+      padding-top: 75%; /* Adjust the aspect ratio for smaller screens */
+    }
+  }
+
+  /* Box shadows for a more polished look */
   .shadow-lg {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   }
 
   .shadow {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
   }
 
   .mt-4 {

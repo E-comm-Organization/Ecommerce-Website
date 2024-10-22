@@ -168,7 +168,7 @@ form{
 .search-button {
     padding: 5px 5px;       /* Space inside the button */
     font-size: 16px;          /* Font size for the button text */
-    background-color: #6E6E6E; /* Button background color */
+    background-color: #BEC8BC; /* Button background color */
     color: white;              /* Text color */
     border: none;              /* No border */
     border-radius: 4px;       /* Rounded corners */
@@ -178,7 +178,7 @@ form{
 
 /* Button hover effect */
 .search-button:hover {
-    background-color: orange; /* Darker blue on hover */
+    background-color: #ccc;
 }
 
 

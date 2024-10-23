@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_16_105224) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_22_103208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,7 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_16_105224) do
     t.text "images"
     t.bigint "category_id"
     t.text "description"
-    t.text "offers"
     t.string "offer"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
@@ -110,6 +109,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_16_105224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role", default: "customer"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

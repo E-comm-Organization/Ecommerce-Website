@@ -86,8 +86,11 @@
         }
 
         .deal-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          transform: scale(1.05); /* Adjust the scale value as needed */
+          transition: transform 0.3s ease; /* Smooth transition */
         }
+
 
         .deal-card h3 {
             font-size: 20px;
@@ -176,19 +179,19 @@
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="<%= asset_path ('image1.png') %>" alt="First slide">
+                    <img src="<%= asset_path ('p1.png') %>" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="<%= asset_path ('image2.png') %>" alt="Second slide">
+                    <img src="<%= asset_path ('p3.png') %>" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="<%= asset_path ('image3.png') %>" alt="Third slide">
+                    <img src="<%= asset_path ('p4.png') %>" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="<%= asset_path ('image5.png') %>" alt="Third slide">
+                    <img src="<%= asset_path ('p5.png') %>" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                    <img src="<%= asset_path ('image6.png') %>" alt="Third slide">
+                    <img src="<%= asset_path ('p6.png') %>" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
